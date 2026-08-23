@@ -1,10 +1,10 @@
 // pdf.js and Tesseract are loaded on demand so the initial bundle stays small.
 async function loadPdfjs() {
   const pdfjsLib = await import('pdfjs-dist')
-  pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
-    'pdfjs-dist/build/pdf.worker.min.mjs',
-    import.meta.url,
-  ).toString()
+  // Use the CDN worker to avoid Vite bundling issues with the worker file
+  const version = pdfjsLib.version
+  pdfjsLib.GlobalWorkerOptions.workerSrc =
+    `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${version}/pdf.worker.min.mjs`
   return pdfjsLib
 }
 

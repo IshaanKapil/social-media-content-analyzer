@@ -45,12 +45,12 @@ export default function ResultCard({ job, onRemove, onTextEdit, onAnalyze }) {
         <div className="stepper">
           <div className={`stepper__step stepper__step--done`}>
             <span className="stepper__dot">✓</span>
-            <span className="stepper__label">Upload</span>
+            <span className="stepper__label">Uploaded</span>
           </div>
           <div className="stepper__connector stepper__connector--done" />
           <div className={`stepper__step stepper__step--done`}>
             <span className="stepper__dot">✓</span>
-            <span className="stepper__label">Extract</span>
+            <span className="stepper__label">Extracted</span>
           </div>
           <div className={`stepper__connector${isDone ? ' stepper__connector--done' : ''}`} />
           <div className={`stepper__step${isExtracted ? ' stepper__step--active' : ''}${isDone ? ' stepper__step--done' : ''}`}>
@@ -60,7 +60,7 @@ export default function ResultCard({ job, onRemove, onTextEdit, onAnalyze }) {
           <div className={`stepper__connector${isDone ? ' stepper__connector--done' : ''}`} />
           <div className={`stepper__step${isDone ? ' stepper__step--done' : ''}`}>
             <span className="stepper__dot">{isDone ? '✓' : '4'}</span>
-            <span className="stepper__label">Analyze</span>
+            <span className="stepper__label">Insights</span>
           </div>
         </div>
       )}
@@ -101,7 +101,7 @@ export default function ResultCard({ job, onRemove, onTextEdit, onAnalyze }) {
                 className={`tab${activeTab === 'analysis' ? ' tab--active' : ''}`}
                 onClick={() => setTab('analysis')}
               >
-                Engagement analysis
+                📊 Engagement insights
               </button>
               <button
                 role="tab"
@@ -109,7 +109,7 @@ export default function ResultCard({ job, onRemove, onTextEdit, onAnalyze }) {
                 className={`tab${activeTab === 'text' ? ' tab--active' : ''}`}
                 onClick={() => setTab('text')}
               >
-                Extracted text
+                📝 Extracted text
               </button>
             </div>
           )}
@@ -122,7 +122,7 @@ export default function ResultCard({ job, onRemove, onTextEdit, onAnalyze }) {
                     <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16" aria-hidden="true">
                       <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                     </svg>
-                    <span>Review and edit the text below to keep <strong>only the caption/post content</strong>, then click Analyze.</span>
+                    <span>Trim out any noise — keep just the <strong>caption or post text</strong>, then hit Analyze.</span>
                   </div>
                 </div>
               )}
@@ -145,7 +145,7 @@ export default function ResultCard({ job, onRemove, onTextEdit, onAnalyze }) {
                   onChange={(e) => onTextEdit(e.target.value)}
                   rows={10}
                   spellCheck={false}
-                  placeholder="Extracted text appears here…"
+                  placeholder="Your extracted text will show up here…"
                 />
               ) : (
                 <pre className="extracted__text">{job.editedText}</pre>
@@ -162,7 +162,7 @@ export default function ResultCard({ job, onRemove, onTextEdit, onAnalyze }) {
                       <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
                       <path fillRule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm9.707 5.707a1 1 0 00-1.414-1.414L9 12.586l-1.293-1.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
-                    Analyze Content
+                    Analyze this post
                   </button>
                   <span className="extracted__char-count">
                     {job.editedText?.length ?? 0} characters
@@ -173,7 +173,7 @@ export default function ResultCard({ job, onRemove, onTextEdit, onAnalyze }) {
           )}
 
           {activeTab === 'analysis' && isDone && (
-            <AnalysisPanel analysis={job.analysis} />
+            <AnalysisPanel analysis={job.analysis} text={job.editedText} />
           )}
         </>
       )}
