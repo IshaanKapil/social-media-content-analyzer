@@ -2,7 +2,7 @@
 
 A web app that extracts text from social media posts shared as **PDFs or images** and suggests concrete **engagement improvements**.
 
-**Live demo:** _add your deployed URL here_
+**Live demo:**https://social-media-content-analyzer-seven-gray.vercel.app/
 
 ## Features
 
